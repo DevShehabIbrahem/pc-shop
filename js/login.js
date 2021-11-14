@@ -11,7 +11,7 @@ register_btn.addEventListener("click", loginvald);
 function loginvald(e) {
   e.preventDefault();
   if (username.value === "" || password.value === "") {
-    alert("plz enter your email");
+    alert("Plz Enter Your Information");
   } else {
     logindone();
   }

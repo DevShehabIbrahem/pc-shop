@@ -11,7 +11,7 @@ function valdetion(e) {
   e.preventDefault();
   //valdetion register
   if (email.value === "" || password.value === "" || username.value === "") {
-    alert("plz enter your email");
+    alert("Plz Enter Your Information");
   } else {
     savedata();
 
