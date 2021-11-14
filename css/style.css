@@ -208,6 +208,9 @@ body {
   .selectpicker {
     display: none;
   }
+  .Mon_logo .mon-form input {
+    width: 84%;
+  }
 }
 
 /* end navbar */
