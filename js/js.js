@@ -4,6 +4,8 @@ let welcomeuser = document.querySelector(".welcome"),
   //local storge data
   userdata = localStorage.getItem("username");
 
+//product
+// let product = [{}];
 function apper() {
   if (userdata) {
     //add welcome to user

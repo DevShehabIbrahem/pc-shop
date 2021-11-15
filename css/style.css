@@ -10,6 +10,7 @@
 body {
   font-family: "Cabin", sans-serif;
   background-color: var(--img-background);
+  height: 2000px;
 }
 /*start Up-bar*/
 .navbar {
@@ -194,7 +195,7 @@ body {
 }
 /* mobile nav */
 .navbar p.nav-mob {
-  position: fixed;
+  position: absolute;
   left: 13px;
 }
 .navbar .nav-list-mob {
@@ -214,3 +215,35 @@ body {
 }
 
 /* end navbar */
+/* carousel */
+.arrow_prev span,
+.arrow_next span {
+  font-size: 26px;
+  color: #fff;
+  border: 1px solid;
+  border-radius: 19px;
+  padding: 3px 7px;
+}
+.arrow_prev {
+  position: absolute;
+  top: 72%;
+  left: 4%;
+  z-index: 1;
+  cursor: pointer;
+}
+.arrow_next {
+  position: absolute;
+  top: 72%;
+  right: 4%;
+  z-index: 1;
+  cursor: pointer;
+}
+.carousel {
+  position: relative;
+}
+@media (max-width: 767px) {
+  .arrow_prev,
+  .arrow_next {
+    display: none;
+  }
+}
