@@ -346,10 +346,4 @@ body {
   transform: scale(1.3, 1.4);
   transition: 1s;
 }
-.badge-warning {
-  color: #212529;
-  background-color: #ffc107;
-  font-size: 23px;
-  padding: 6px;
-}
 /* proudcts silde  */
