@@ -10,7 +10,7 @@ let welcomeuser = document.querySelector(".welcome"), //welcome div
   productscart = document.querySelector(".cart-products"), //menu produtcts parent
   productscartdiv = document.querySelector(".cart-products div"); //menu produtcts
 
-function apper() {
+(function apper() {
   if (userdata) {
     //add welcome to user
     welcomeuser.innerHTML += " welcome " + userdata;
@@ -23,46 +23,22 @@ function apper() {
   } else {
     user_data.classList.remove("d-none");
   }
-}
-apper();
+})();
 
-logout.addEventListener("click", logoutt);
 //when user getout from the website
+logout.addEventListener("click", logoutt);
+
 function logoutt() {
-  //clear inforamtion from database
+  //clear inforamtion from database =>localstorge
   if (userdata) localStorage.clear();
   setTimeout(() => {
     window.location = "login.html";
   }, 1500);
 }
-
-//products
-let products = [
-  {
-    id: 1,
-    title: "Asus pc",
-    imge: "./img/p1.png",
-  },
-  {
-    id: 2,
-    title: "Msi pc",
-    imge: "./img/p2.png",
-  },
-  {
-    id: 3,
-    title: "Aorus pc",
-    imge: "./img/p3.png",
-  },
-  {
-    id: 4,
-    title: "Valorant pc",
-    imge: "./img/p4.jpg",
-  },
-];
-function productsuI() {
+//dis[lay data in DOM
+(function productsuI() {
   let product = products.map((item) => {
     return `
-   
       <div class="col-md-12">
         <div class="content">
         
@@ -76,32 +52,45 @@ function productsuI() {
       </a>
          
       </div>
-     
     `;
   });
   productcont.innerHTML = product;
-}
-productsuI();
-//show items in menu && incress the number
-let addeditem = []; //added item
-function addedTocard(id) {
-  if (localStorage.getItem("username")) {
-    let choosenitems = products.find((item) => item.id === id); // get ele by id
-    addeditem = [...addeditem, choosenitems]; //add the useritems insid array
+})();
+//save data in shoop icon after reloade
+(function itemsbasketnum() {
+  let useritems = localStorage.getItem("items");
+  let usershhop = JSON.parse(useritems);
+  if (usershhop) {
+    usershhop.map((item) => {
+      productscartdiv.innerHTML += `<li class="list-group-item">${item.title}</li>`;
+    });
+    basket.innerHTML += usershhop.length; //fixd length
+  }
+})();
 
-    localStorage.setItem("items", JSON.stringify(addeditem));
-    console.log(addeditem);
+function addedTocard(id) {
+  //show items in menu && incress the number of items
+  let addeditem = localStorage.getItem("items") //save data after the reloade
+    ? JSON.parse(localStorage.getItem("items"))
+    : [];
+  if (localStorage.getItem("username")) {
+    // <= if user is login
+
+    let choosenitems = products.find((item) => item.id === id); // get full ele by id
+
+    addeditem = [...addeditem, choosenitems]; //add the useritems insid array for inline data
+
+    localStorage.setItem("items", JSON.stringify(addeditem)); //add this string items to local
     productscartdiv.innerHTML += `<li class="list-group-item">${choosenitems.title}</li>`; // add ele by ` `
     // length products
-    let lengthproducts = document.querySelectorAll(".cart-products li");
+    let lengthproducts = document.querySelectorAll(".cart-products li"); //all data inside the div
     basket.innerHTML = lengthproducts.length; // how much items inside the basket
   } else {
     window.location = "./login.html";
   }
 }
 
-//show menu
-
+//open menu
 shoopingitem.addEventListener("click", showitems);
 
 function showitems() {

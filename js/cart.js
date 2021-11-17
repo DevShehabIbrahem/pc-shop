@@ -1,13 +1,13 @@
-let localitems = localStorage.getItem("items"),
-  productssection = document.querySelector(".my_product");
-
+let productssection = document.querySelector(".my_product");
+//REFACT THE ITEMS TO MAP
 if (productssection) {
+  let localitems = localStorage.getItem("items");
   let chossenitems = JSON.parse(localitems);
   productui(chossenitems);
 }
-
+//show the items in cart page
 function productui(chossenitems) {
-  let chossen = chossenitems.map((item) => {
+  let items = chossenitems.map((item) => {
     return `
        
           <div class="col-md-12">
@@ -26,8 +26,18 @@ function productui(chossenitems) {
          
         `;
   });
-  productssection.innerHTML = chossen;
+  productssection.innerHTML = items;
 }
+//remove items
 function removeitem(id) {
-  console.log(id);
+  let localitems = localStorage.getItem("items");
+
+  if (localitems) {
+    let myitems = JSON.parse(localitems);
+
+    let fitlerd = myitems.filter((item) => item.id != id);
+    productui(fitlerd);
+    localStorage.setItem("items", JSON.stringify(fitlerd));
+    console.log(fitlerd);
+  }
 }
