@@ -1,11 +1,14 @@
-let welcomeuser = document.querySelector(".welcome"),
+let welcomeuser = document.querySelector(".welcome"), //welcome div
   logout = document.querySelector("#logout"),
   user_data = document.querySelector(".user-data"),
   //local storge data
   userdata = localStorage.getItem("username"),
   //product container
   productcont = document.querySelector(".my_product"),
-  basket = document.querySelector(".shoopicon");
+  basket = document.querySelector("#cart"), // em badge
+  shoopingitem = document.querySelector(".shoopicon"), //icon
+  productscart = document.querySelector(".cart-products"), //menu produtcts parent
+  productscartdiv = document.querySelector(".cart-products div"); //menu produtcts
 
 function apper() {
   if (userdata) {
@@ -37,18 +40,22 @@ function logoutt() {
 let products = [
   {
     id: 1,
+    title: "Asus pc",
     imge: "./img/p1.png",
   },
   {
     id: 2,
+    title: "Msi pc",
     imge: "./img/p2.png",
   },
   {
     id: 3,
+    title: "Aorus pc",
     imge: "./img/p3.png",
   },
   {
     id: 4,
+    title: "Valorant pc",
     imge: "./img/p4.jpg",
   },
 ];
@@ -69,25 +76,37 @@ function productsuI() {
       </a>
          
       </div>
-    
      
-  
-      
     `;
   });
   productcont.innerHTML = product;
 }
 productsuI();
-console.log();
+//show items in menu && incress the number
+let addeditem = []; //added item
 function addedTocard(id) {
-  let choosenitems = products.find((item) => item.id === id);
-  console.log(choosenitems);
+  if (localStorage.getItem("username")) {
+    let choosenitems = products.find((item) => item.id === id); // get ele by id
+    addeditem = [...addeditem, choosenitems]; //add the useritems insid array
+
+    localStorage.setItem("items", JSON.stringify(addeditem));
+    console.log(addeditem);
+    productscartdiv.innerHTML += `<li class="list-group-item">${choosenitems.title}</li>`; // add ele by ` `
+    // length products
+    let lengthproducts = document.querySelectorAll(".cart-products li");
+    basket.innerHTML = lengthproducts.length; // how much items inside the basket
+  } else {
+    window.location = "./login.html";
+  }
 }
 
-// function cheaklogeduser(id) {
-//   if (localStorage.getItem("username")) {
-//     alert(id);
-//   } else {
-//     window.location = "login.html";
-//   }
-// }
+//show menu
+
+shoopingitem.addEventListener("click", showitems);
+
+function showitems() {
+  if (productscartdiv.innerHTML != "") {
+    // if this div not empty show
+    productscart.classList.toggle("d-none");
+  }
+}
