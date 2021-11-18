@@ -10,7 +10,6 @@
 body {
   font-family: "Cabin", sans-serif;
   background-color: var(--img-background);
-  height: 2000px;
 }
 /*start Up-bar*/
 .navbar {
@@ -102,6 +101,23 @@ body {
   }
   .Mon_logo .Customized .mon-form {
     width: 100%;
+  }
+  .info {
+    overflow: hidden;
+  }
+  .info span {
+    font-size: 19px;
+    color: #fff;
+    margin-left: 22px;
+  }
+  .info a {
+    margin: 0;
+  }
+  .product-custom i {
+    font-size: 23px;
+  }
+  .my_product {
+    padding: 51px 0;
   }
 }
 
@@ -323,15 +339,15 @@ body {
 }
 /* end navbar */
 /*  start cover */
-.cover {
+#product {
   background-image: url("/img/valorant-background-hd-wallpaper-1920x1080-uhdpaper.com-764.1_b.jpg");
   background-repeat: no-repeat;
-  background-size: cover;
   background-attachment: fixed;
-  height: 1000vh;
+  background-size: cover;
+  height: 83vh;
   position: relative;
 }
-.cover::before {
+#product::before {
   content: "";
   position: absolute;
   top: 0;
@@ -342,21 +358,60 @@ body {
 }
 /* end cover */
 /* proudcts silde  */
-.slick-slide img {
-  height: 52vh;
+.btns {
+  flex-direction: row;
+  margin-bottom: 20px;
+}
+.btns li {
+  margin-left: 20px;
+  transition: 1s ease-in;
+}
+.btns li:hover {
+  background-color: #2f2f2f80;
+  cursor: pointer;
+}
+.btns li a {
+  text-decoration: none;
+  color: #ffce45;
+  text-transform: uppercase;
 }
 .product-icon {
   position: absolute;
-  top: 81%;
-  left: 8%;
+  bottom: 0;
+  left: 24px;
   font-size: 33px;
-
-  color: red;
+  transition: 1s;
+  color: #ffce45;
 }
-.product-icon:hover {
+.product-icon:hover,
+.product-main:hover,
+.product-custom:hover {
   color: #ffce45;
   transform: scale(1.3, 1.4);
+}
+
+.product-custom {
+  font-size: 33px;
   transition: 1s;
+  color: #ffce45;
+  margin-left: 17px;
+}
+.info span {
+  font-size: 19px;
+  float: right;
+  margin-right: 19px;
+  text-align: center;
+  line-height: 47px;
+  color: #fff;
+}
+
+.product-main {
+  position: absolute;
+  left: 24px;
+  bottom: 0;
+  font-size: 33px;
+  transition: 1s;
+  color: #ffce45;
 }
 .badge-warning {
   color: #212529;
@@ -383,3 +438,196 @@ body {
 }
 
 /* cart-menu */
+/* title */
+.products-title {
+  text-align: center;
+  margin: 90px 0;
+}
+.products-title h3 {
+  color: #fffdfd;
+  font-size: 40px;
+  text-transform: capitalize;
+}
+/* title */
+/* products animation */
+.my_productthree img {
+  transition: 0.5s;
+  cursor: pointer;
+  position: relative;
+}
+.my_productthree img:hover {
+  transform: scale(1.1);
+}
+.my_product {
+  padding: 97px 0;
+}
+.my_product img {
+  transition: 0.5s;
+  position: relative;
+  cursor: pointer;
+  height: 50vh;
+}
+.my_product img:hover {
+  transform: scale(1.1);
+}
+/* products animation */
+/* start about */
+.about {
+  margin: 90px 0;
+}
+.about .info {
+  color: var(--another-color-font);
+  font-size: 19px;
+  line-height: 46px;
+}
+.about .img {
+  max-width: 74%;
+}
+.about .img .company {
+  width: 100%;
+}
+.about .img .power {
+  animation: logo 10s linear infinite;
+}
+@keyframes logo {
+  0% {
+    transform: rotate(20deg);
+  }
+  50% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(20deg);
+  }
+}
+@media (max-width: 768px) {
+  .about .img {
+    margin: 0 auto;
+  }
+  .about .info {
+    text-align: center;
+  }
+  .info .last-icons {
+    justify-content: center;
+  }
+  .email {
+    text-align: center;
+  }
+  .email .fonts ul.list-group {
+    justify-content: center;
+  }
+}
+.last-icons {
+  flex-direction: row;
+  justify-content: left;
+}
+.last-icons li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.last-icons li i {
+  border: 1px solid #000;
+  background-color: #222121f5;
+  padding: 14px;
+  border-radius: 30px;
+  color: #ffce45;
+  font-size: 24px;
+  transition: 1s;
+}
+.last-icons li i:hover {
+  color: red;
+}
+
+/* end about */
+
+/* start search */
+.email .bar {
+  position: relative;
+}
+.email .bar input {
+  padding: 20px;
+  width: 100%;
+  outline: none;
+  border: 5px solid #5a5858;
+}
+.email .bar a {
+  position: absolute;
+  right: 13%;
+  top: 21px;
+  color: #6c6868;
+  border: 1px solid;
+  padding: 4px;
+  text-decoration: none;
+}
+.email .bar .icon {
+  position: absolute;
+  top: 18px;
+  right: 23px;
+}
+.email .bar .icon i {
+  color: #ffce45;
+  font-size: 35px;
+  cursor: pointer;
+}
+.email .fonts ul {
+  flex-direction: row;
+  justify-content: left;
+}
+.email .fonts ul li a {
+  color: var(--main-color-font);
+  font-size: 28px;
+}
+
+/* end search */
+/* start brand */
+.brand {
+  margin-top: 50px;
+}
+/* end brand */
+
+/* start footer */
+.footer-info {
+  margin-top: 1rem;
+}
+.footer-info .mon-data > dd {
+  font-size: 18px;
+}
+.footer-info .mon-data > dt > span a {
+  margin-bottom: 9px;
+  font-size: 14px;
+  display: block;
+  color: #fff;
+}
+.footer-logo .last-img {
+  border: 3px solid #ff00004a;
+}
+footer {
+  color: #fff;
+}
+.list-unstyled li.quick {
+  margin-bottom: 13px;
+}
+.list-unstyled li.quick a {
+  color: #fff;
+}
+em.icon-mon::before {
+  position: absolute;
+  content: "\f00c";
+  font-family: FontAwesome;
+  color: #e41d74;
+}
+footer .last-info a {
+  padding-left: 22px;
+  color: #fff;
+}
+footer .last-info li {
+  margin-bottom: 10px;
+}
+footer.page-footer {
+  margin-top: 13rem !important;
+}
+
+/* footer */
+
+/* end footer */

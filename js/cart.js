@@ -10,7 +10,7 @@ function productui(chossenitems) {
   let items = chossenitems.map((item) => {
     return `
        
-          <div class="col-md-12">
+          <div class="col-md-2">
             <div class="content">
             
               <div><img src="${item.imge}"  class="img-fluid" alt="img"></div>
@@ -36,7 +36,7 @@ function removeitem(id) {
     let myitems = JSON.parse(localitems);
 
     let fitlerd = myitems.filter((item) => item.id != id);
-    productui(fitlerd);
+    productui(fitlerd); //upstae my ui
     localStorage.setItem("items", JSON.stringify(fitlerd));
     console.log(fitlerd);
   }

@@ -5,10 +5,13 @@ let welcomeuser = document.querySelector(".welcome"), //welcome div
   userdata = localStorage.getItem("username"),
   //product container
   productcont = document.querySelector(".my_product"),
+  sellerdiv = document.querySelector(".my_producttow"),
+  prothree = document.querySelector(".my_productthree"),
   basket = document.querySelector("#cart"), // em badge
   shoopingitem = document.querySelector(".shoopicon"), //icon
   productscart = document.querySelector(".cart-products"), //menu produtcts parent
   productscartdiv = document.querySelector(".cart-products div"); //menu produtcts
+//menu produtcts
 
 (function apper() {
   if (userdata) {
@@ -35,7 +38,7 @@ function logoutt() {
     window.location = "login.html";
   }, 1500);
 }
-//dis[lay data in DOM
+//display data in DOM
 (function productsuI() {
   let product = products.map((item) => {
     return `
@@ -44,10 +47,10 @@ function logoutt() {
         
           <div><img src="${item.imge}"  class="img-fluid" alt="img"></div>
           </div>
-          <a href="#" onclick="addedTocard(${item.id}); return false;" class="product-icon" >
+          <a href="#" onclick="addedTocard(${item.id}); return false;" class="product-main" >
        
        
-        <i class="fa fa-heart"></i>
+          <i class="fa fa-cart-plus" aria-hidden="true"></i>
      
       </a>
          
@@ -56,6 +59,62 @@ function logoutt() {
   });
   productcont.innerHTML = product;
 })();
+
+//display data in DOM
+(function bestseeleruI() {
+  let bestseller = productstow.map((item) => {
+    return `
+        <div class="col-md-12">
+          <div class="content">
+          <div class="bg-light rounded">
+            
+            <img src="${item.imge}"  class="img-fluid" alt="img">
+           
+            <div class="info bg-dark"  >
+            <a href="#" onclick="addedToselser(${item.id}); return false;" class="product-custom" >
+         
+         
+            <i class="fa fa-cart-plus" aria-hidden="true"> 230$</i>
+            
+
+         
+          </a>
+          <span class="lorem">Lorem Ipsum</span>
+            </div>
+
+            </div>
+           
+            </div>
+           
+
+        </div>
+      `;
+  });
+  sellerdiv.innerHTML = bestseller;
+})();
+
+(function profthree() {
+  let prof = productsthree.map((item) => {
+    return `
+        <div class="col-md-12">
+          <div class="content">
+          
+            <div><img src="${item.imge}"  class="img-fluid" alt="img"></div>
+            </div>
+            <a href="#" onclick="addedToprof(${item.id}); return false;" class="product-icon" >
+         
+         
+            <i class="fa fa-cart-plus" aria-hidden="true"></i>
+
+       
+        </a>
+
+        </div>
+      `;
+  });
+  prothree.innerHTML = prof;
+})();
+
 //save data in shoop icon after reloade
 (function itemsbasketnum() {
   let useritems = localStorage.getItem("items");
@@ -76,7 +135,7 @@ function addedTocard(id) {
   if (localStorage.getItem("username")) {
     // <= if user is login
 
-    let choosenitems = products.find((item) => item.id === id); // get full ele by id
+    let choosenitems = products.find((item) => item.id === id);
 
     addeditem = [...addeditem, choosenitems]; //add the useritems insid array for inline data
 
@@ -90,6 +149,43 @@ function addedTocard(id) {
   }
 }
 
+// best seller add
+function addedToselser(id) {
+  //show items in menu && incress the number of items
+  let addeditem = localStorage.getItem("items") //save data after the reloade in locastorge
+    ? JSON.parse(localStorage.getItem("items"))
+    : [];
+
+  if (localStorage.getItem("username")) {
+    // <= if user is login
+    let choosenitems = productstow.find((item) => item.id === id); //objct ele
+
+    addeditem = [...addeditem, choosenitems]; //add the useritems insid array for inline data
+
+    localStorage.setItem("items", JSON.stringify(addeditem)); //add this string items to local
+
+    productscartdiv.innerHTML += `<li class="list-group-item">${choosenitems.title}</li>`; // add ele by ` `
+
+    // length products
+    let lengthproducts = document.querySelectorAll(".cart-products li"); //all data inside the div
+    basket.innerHTML = lengthproducts.length; // how much items inside the basket
+  } else {
+    window.location = "./login.html";
+  }
+}
+
+// prof items
+function addedToprof(id) {
+  let addeditem = localStorage.getItem("items")
+    ? JSON.parse(localStorage.getItem("items"))
+    : [];
+  let chossenitems = productsthree.find((item) => item.id === id);
+  addeditem = [...addeditem, chossenitems];
+  localStorage.setItem("items", JSON.stringify(addeditem));
+  productscartdiv.innerHTML += `<li class="list-group-item">${chossenitems.title}</li>`;
+  let many = document.querySelectorAll(".cart-products li");
+  basket.innerHTML = many.length;
+}
 //open menu
 shoopingitem.addEventListener("click", showitems);
 
@@ -99,3 +195,6 @@ function showitems() {
     productscart.classList.toggle("d-none");
   }
 }
+
+// best seller
+//

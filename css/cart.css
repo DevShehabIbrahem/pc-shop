@@ -21,4 +21,30 @@
   font-size: 23px;
   padding: 6px;
 }
+/*  start cover */
+#cart-product {
+  background-image: url("/img/valorant-background-hd-wallpaper-1920x1080-uhdpaper.com-764.1_b.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  height: 100vh;
+  position: relative;
+}
+#cart-product::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgb(0 0 0 / 78%);
+}
+.my_product {
+  display: flex;
+}
+.my_product img {
+  height: 30vh;
+  margin-top: 14px;
+}
+/* end cover */
 /* proudcts silde  */
