@@ -11,9 +11,7 @@ body {
   font-family: "Cabin", sans-serif;
   background-color: var(--img-background);
 }
-.wow {
-  visibility: hidden;
-}
+
 /*start Up-bar*/
 .navbar {
   background-color: var(--img-background);
