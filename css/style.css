@@ -340,7 +340,7 @@ body {
 /* end navbar */
 /*  start cover */
 #product {
-  background-image: url("./img/valo.jpg");
+  background-image: url("../img/valo.jpg");
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
