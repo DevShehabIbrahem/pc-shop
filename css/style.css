@@ -391,10 +391,12 @@ body {
 }
 
 .product-custom {
-  font-size: 33px;
+  font-size: 26px;
   transition: 1s;
   color: #ffce45;
-  margin-left: 17px;
+}
+.info {
+  overflow: hidden;
 }
 .info span {
   font-size: 19px;

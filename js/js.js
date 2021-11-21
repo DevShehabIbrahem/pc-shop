@@ -11,8 +11,7 @@ let welcomeuser = document.querySelector(".welcome"), //welcome div
   shoopingitem = document.querySelector(".shoopicon"), //icon
   productscart = document.querySelector(".cart-products"), //menu produtcts parent
   productscartdiv = document.querySelector(".cart-products div"); //menu produtcts
-//menu produtcts
-
+//welcome user
 (function apper() {
   if (userdata) {
     //add welcome to user
@@ -28,7 +27,7 @@ let welcomeuser = document.querySelector(".welcome"), //welcome div
   }
 })();
 
-//when user getout from the website
+//when user getout from the website {start}
 logout.addEventListener("click", logoutt);
 
 function logoutt() {
@@ -38,7 +37,9 @@ function logoutt() {
     window.location = "login.html";
   }, 1500);
 }
-//display data in DOM
+//when user getout from the website {end}
+
+//display data in DOM {start}
 (function productsuI() {
   let product = products.map((item) => {
     return `
@@ -60,32 +61,27 @@ function logoutt() {
   productcont.innerHTML = product;
 })();
 
-//display data in DOM
 (function bestseeleruI() {
   let bestseller = productstow.map((item) => {
     return `
         <div class="col-md-12">
           <div class="content">
           <div class="bg-light rounded">
-            
+
             <img src="${item.imge}"  class="img-fluid" alt="img">
-           
+
             <div class="info bg-dark"  >
             <a href="#" onclick="addedToselser(${item.id}); return false;" class="product-custom" >
-         
-         
-            <i class="fa fa-cart-plus" aria-hidden="true"> 230$</i>
-            
 
-         
+            <i class="fa fa-cart-plus" aria-hidden="true"> 230$</i>
+
           </a>
           <span class="lorem">Lorem Ipsum</span>
             </div>
 
             </div>
-           
+
             </div>
-           
 
         </div>
       `;
@@ -93,12 +89,12 @@ function logoutt() {
   sellerdiv.innerHTML = bestseller;
 })();
 
-(function profthree() {
+(function profthreeui() {
   let prof = productsthree.map((item) => {
     return `
         <div class="col-md-12">
           <div class="content">
-          
+
             <div><img src="${item.imge}"  class="img-fluid" alt="img"></div>
             </div>
             <a href="#" onclick="addedToprof(${item.id}); return false;" class="product-icon" >
@@ -114,78 +110,135 @@ function logoutt() {
   });
   prothree.innerHTML = prof;
 })();
+//display data in DOM {end}
 
-//save data in shoop icon after reloade
+//save data in shoop icon after reloade {start}
 (function itemsbasketnum() {
-  let useritems = localStorage.getItem("items");
+  let useritems = localStorage.getItem("prodctsincart");
   let usershhop = JSON.parse(useritems);
   if (usershhop) {
     usershhop.map((item) => {
-      productscartdiv.innerHTML += `<li class="list-group-item">${item.title}</li>`;
+      productscartdiv.innerHTML += `<li class="list-group-item">${item.title}${item.qty}</li>`;
     });
     basket.innerHTML += usershhop.length; //fixd length
   }
 })();
+let addeditem = localStorage.getItem("items") //save data after the reloade
+  ? JSON.parse(localStorage.getItem("items"))
+  : [];
+let allitems = [];
+//save data in shoop icon after reloade {end}
 
+//add To card logic {start}
 function addedTocard(id) {
   //show items in menu && incress the number of items
-  let addeditem = localStorage.getItem("items") //save data after the reloade
-    ? JSON.parse(localStorage.getItem("items"))
-    : [];
+
   if (localStorage.getItem("username")) {
     // <= if user is login
 
     let choosenitems = products.find((item) => item.id === id);
+    //fisrt time user choosen retrun =>obj
+    let item = allitems.find((i) => i.id === choosenitems.id);
+
+    if (item) {
+      choosenitems.qty += 1;
+    } else {
+      allitems.push(choosenitems);
+    }
+    productscartdiv.innerHTML = "";
+    allitems.forEach((item) => {
+      productscartdiv.innerHTML += `<li class="list-group-item">${item.title} ${item.qty}</li>`; // add ele by ` `
+    });
 
     addeditem = [...addeditem, choosenitems]; //add the useritems insid array for inline data
+    let unique = getuniqueArr(addeditem, "id");
 
-    localStorage.setItem("items", JSON.stringify(addeditem)); //add this string items to local
-    productscartdiv.innerHTML += `<li class="list-group-item">${choosenitems.title}</li>`; // add ele by ` `
+    localStorage.setItem("prodctsincart", JSON.stringify(unique)); //add this string items to local
+
     // length products
-    let lengthproducts = document.querySelectorAll(".cart-products li"); //all data inside the div
+    let lengthproducts = document.querySelectorAll(".cart-products div li"); //all data inside the div
     basket.innerHTML = lengthproducts.length; // how much items inside the basket
   } else {
     window.location = "./login.html";
   }
 }
 
-// best seller add
 function addedToselser(id) {
   //show items in menu && incress the number of items
-  let addeditem = localStorage.getItem("items") //save data after the reloade in locastorge
-    ? JSON.parse(localStorage.getItem("items"))
-    : [];
 
   if (localStorage.getItem("username")) {
     // <= if user is login
-    let choosenitems = productstow.find((item) => item.id === id); //objct ele
+
+    let choosenitems = productstow.find((item) => item.id === id);
+    //fisrt time user choosen retrun =>obj
+    let item = allitems.find((i) => i.id === choosenitems.id);
+
+    if (item) {
+      choosenitems.qty += 1;
+    } else {
+      allitems.push(choosenitems);
+    }
+    productscartdiv.innerHTML = "";
+    allitems.forEach((item) => {
+      productscartdiv.innerHTML += `<li class="list-group-item">${item.title} ${item.qty}</li>`; // add ele by ` `
+    });
 
     addeditem = [...addeditem, choosenitems]; //add the useritems insid array for inline data
+    let unique = getuniqueArr(addeditem, "id");
 
-    localStorage.setItem("items", JSON.stringify(addeditem)); //add this string items to local
-
-    productscartdiv.innerHTML += `<li class="list-group-item">${choosenitems.title}</li>`; // add ele by ` `
+    localStorage.setItem("prodctsincart", JSON.stringify(unique)); //add this string items to local
 
     // length products
-    let lengthproducts = document.querySelectorAll(".cart-products li"); //all data inside the div
+    let lengthproducts = document.querySelectorAll(".cart-products div li"); //all data inside the div
     basket.innerHTML = lengthproducts.length; // how much items inside the basket
   } else {
     window.location = "./login.html";
   }
 }
 
-// prof items
 function addedToprof(id) {
-  let addeditem = localStorage.getItem("items")
-    ? JSON.parse(localStorage.getItem("items"))
-    : [];
-  let chossenitems = productsthree.find((item) => item.id === id);
-  addeditem = [...addeditem, chossenitems];
-  localStorage.setItem("items", JSON.stringify(addeditem));
-  productscartdiv.innerHTML += `<li class="list-group-item">${chossenitems.title}</li>`;
-  let many = document.querySelectorAll(".cart-products li");
-  basket.innerHTML = many.length;
+  //show items in menu && incress the number of items
+
+  if (localStorage.getItem("username")) {
+    // <= if user is login
+
+    let choosenitems = productsthree.find((item) => item.id === id);
+    //fisrt time user choosen retrun =>obj
+    let item = allitems.find((i) => i.id === choosenitems.id);
+
+    if (item) {
+      choosenitems.qty += 1;
+    } else {
+      allitems.push(choosenitems);
+    }
+    productscartdiv.innerHTML = "";
+    allitems.forEach((item) => {
+      productscartdiv.innerHTML += `<li class="list-group-item">${item.title} ${item.qty}</li>`; // add ele by ` `
+    });
+
+    addeditem = [...addeditem, choosenitems]; //add the useritems insid array for inline data
+    let unique = getuniqueArr(addeditem, "id");
+
+    localStorage.setItem("prodctsincart", JSON.stringify(unique)); //add this string items to local
+
+    // length products
+    let lengthproducts = document.querySelectorAll(".cart-products div li"); //all data inside the div
+    basket.innerHTML = lengthproducts.length; // how much items inside the basket
+  } else {
+    window.location = "./login.html";
+  }
 }
+//unique numbber in local
+function getuniqueArr(arr, filtertype) {
+  let unique = arr
+    .map((item) => item[filtertype])
+    .map((item, i, last) => last.indexOf(item) === i && i)
+    .filter((item) => arr[item])
+    .map((item) => arr[item]);
+  return unique;
+}
+//add To card logic {end}
+
 //open menu
 shoopingitem.addEventListener("click", showitems);
 
@@ -195,6 +248,3 @@ function showitems() {
     productscart.classList.toggle("d-none");
   }
 }
-
-// best seller
-//
